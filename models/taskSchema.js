@@ -15,9 +15,33 @@ const taskSchema = Schema(
       type: String,
       required: true,
     },
-    supplier: {
+    dateOrder: {
       type: String,
       required: true,
+    },
+    supplier: {
+      type: String,
+      required: false,
+    },
+    dateInvoice: {
+      type: String,
+      required: true,
+    },
+    datePayment: {
+      type: String,
+      required: false,
+    },
+    freight: {
+      type: String,
+      required: false,
+    },
+    dateETA: {
+      type: String,
+      required: false,
+    },
+    dateETD: {
+      type: String,
+      required: false,
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -30,8 +54,15 @@ const taskSchema = Schema(
 
 const joiTaskSchema = Joi.object({
   name: Joi.string().required(),
-  todos: Joi.array().required(),
-  color: Joi.string().required(),
+  qty: Joi.number().required(),
+  unit: Joi.string().required(),
+  dateOrder: Joi.string().required(),
+  supplier: Joi.string(),
+  dateInvoice: Joi.string(),
+  datePayment: Joi.string(),
+  freight: Joi.string(),
+  dateETA: Joi.string(),
+  dateETD: Joi.string().required(),
 });
 
 const joiTaskStatusSchema = Joi.object({
