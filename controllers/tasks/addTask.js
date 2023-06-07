@@ -11,7 +11,10 @@ const addTask = async (req, res, next) => {
       throw error;
     }
 
-    const data = await Task.create({ ...req.body, owner: _id });
+    const data = await Task.create({
+      ...req.body,
+      owner: _id,
+    });
 
     res.status(201).json(data);
   } catch (error) {

@@ -43,6 +43,10 @@ const taskSchema = Schema(
       type: String,
       required: false,
     },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
@@ -66,7 +70,7 @@ const joiTaskSchema = Joi.object({
 });
 
 const joiTaskStatusSchema = Joi.object({
-  color: Joi.boolean().required(),
+  completed: Joi.boolean().required(),
 });
 
 const Task = model("task", taskSchema);

@@ -1,22 +1,21 @@
-const { Task, joiTodosSchema } = require("../../models/taskSchema");
+const { Task, joiTaskSchema } = require("../../models/taskSchema");
 const { NotFound } = require("http-errors");
 
 const updateTask = async (req, res, next) => {
   const { taskId } = req.params;
-  const { todos } = req.body;
 
   try {
-    const { error } = joiTodosSchema.validate({ todos });
+    const { error } = joiTaskSchema.validate(req.body);
 
     if (error) {
       error.status = 400;
-      error.message = "missing todos";
+      error.message = "body error";
       throw error;
     }
 
     const data = await Task.findByIdAndUpdate(
       taskId,
-      { todos },
+      { ...req.body },
       {
         new: true,
       }

@@ -3,10 +3,10 @@ const { NotFound } = require("http-errors");
 
 const updateTaskStatus = async (req, res, next) => {
   const { taskId } = req.params;
-  const { status } = req.body;
+  const { completed } = req.body;
 
   try {
-    const { error } = joiTaskStatusSchema.validate({ status });
+    const { error } = joiTaskStatusSchema.validate({ completed });
 
     if (error) {
       error.status = 400;
@@ -16,7 +16,7 @@ const updateTaskStatus = async (req, res, next) => {
 
     const data = await Task.findByIdAndUpdate(
       taskId,
-      { status },
+      { completed },
       {
         new: true,
       }
