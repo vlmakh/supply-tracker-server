@@ -1,14 +1,14 @@
 const express = require("express");
-const { notes: ctrl } = require("../controllers");
+const { tasks: ctrl } = require("../controllers");
 const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get("/", auth, ctrl.getNotes);
+router.get("/", auth, ctrl.getTasks);
 
-router.post("/", auth, ctrl.addNote);
+router.post("/", auth, ctrl.addTask);
 
-router.delete("/:taskId", auth, ctrl.deleteNote);
+router.delete("/:taskId", auth, ctrl.deleteTask);
 
 router.put("/:taskId/", auth, ctrl.updateTask);
 
