@@ -16,7 +16,7 @@ const taskSchema = Schema(
       required: true,
     },
     dateOrder: {
-      type: String,
+      type: Date,
       required: true,
     },
     supplier: {
@@ -60,7 +60,7 @@ const joiTaskSchema = Joi.object({
   name: Joi.string().required(),
   qty: Joi.number().required(),
   unit: Joi.string().required(),
-  dateOrder: Joi.string().required(),
+  dateOrder: Joi.date().required(),
   supplier: Joi.string(),
   dateInvoice: Joi.string(),
   datePayment: Joi.string(),
