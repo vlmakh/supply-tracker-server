@@ -3,6 +3,7 @@ const addTask = require("./addTask");
 const deleteTask = require("./deleteTask");
 const updateTask = require("./updateTask");
 const updateTaskStatus = require("./updateTaskStatus");
+const getTasksByRange = require("./getTasksByRange");
 
 module.exports = {
   getTasks,
@@ -10,4 +11,5 @@ module.exports = {
   deleteTask,
   updateTask,
   updateTaskStatus,
+  getTasksByRange,
 };

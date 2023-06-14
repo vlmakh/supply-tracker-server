@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.get("/", auth, ctrl.getTasks);
 
+router.get("/range", auth, ctrl.getTasksByRange);
+
 router.post("/", auth, ctrl.addTask);
 
 router.delete("/:taskId", auth, ctrl.deleteTask);
