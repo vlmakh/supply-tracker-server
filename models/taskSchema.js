@@ -23,20 +23,20 @@ const taskSchema = Schema(
       type: String,
     },
     dateInvoice: {
-      type: String,
+      type: Date,
     },
     datePayment: {
-      type: String,
+      type: Date,
     },
     freight: {
       type: String,
       required: true,
     },
     dateETD: {
-      type: String,
+      type: Date,
     },
     dateETA: {
-      type: String,
+      type: Date,
       required: true,
     },
     completed: {
@@ -62,11 +62,11 @@ const joiTaskSchema = Joi.object({
   unit: Joi.string().required(),
   dateOrder: Joi.date().required(),
   supplier: Joi.string(),
-  dateInvoice: Joi.string(),
-  datePayment: Joi.string(),
+  dateInvoice: Joi.date(),
+  datePayment: Joi.date(),
   freight: Joi.string(),
-  dateETD: Joi.string(),
-  dateETA: Joi.string().required(),
+  dateETD: Joi.date(),
+  dateETA: Joi.date().required(),
   comments: Joi.string(),
 });
 
