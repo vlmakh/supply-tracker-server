@@ -45,7 +45,6 @@ const taskSchema = Schema(
     },
     comments: {
       type: String,
-      default: "-",
     },
     owner: {
       type: Schema.Types.ObjectId,
