@@ -2,7 +2,8 @@ const { User, joiUpdatePassSchema } = require("../../models/userSchema");
 const bcrypt = require("bcryptjs");
 
 const updatePass = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { password } = req.body;
+  const { user } = req;
 
   try {
     const { error } = joiUpdatePassSchema.validate(req.body);
@@ -14,7 +15,7 @@ const updatePass = async (req, res, next) => {
 
     const hashNewPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
-    await User.findOneAndUpdate({ email }, { password: hashNewPassword });
+    await User.findByIdAndUpdate(user._id, { password: hashNewPassword });
 
     res.status(200).json({
       message: "Password updated successfully",
