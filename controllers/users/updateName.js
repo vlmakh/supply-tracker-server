@@ -1,8 +1,8 @@
 const { User, joiUpdateNameSchema } = require("../../models/userSchema");
-const { NotFound } = require("http-errors");
 
 const updateName = async (req, res, next) => {
-  const { name, email } = req.body;
+  const { name } = req.body;
+  const { user } = req;
 
   try {
     const { error } = joiUpdateNameSchema.validate(req.body);
@@ -12,21 +12,17 @@ const updateName = async (req, res, next) => {
       throw error;
     }
 
-    const user = await User.findOneAndUpdate(
-      { email },
+    const updatedUser = await User.findByIdAndUpdate(
+      user._id,
       { name },
       {
         new: true,
       }
     );
 
-    if (!user) {
-      throw NotFound(`User with ${email} was not found`);
-    }
-
     res.status(200).json({
-      name: user.name,
-      email: user.email,
+      name: updatedUser.name,
+      email: updatedUser.email,
     });
   } catch (error) {
     next(error);

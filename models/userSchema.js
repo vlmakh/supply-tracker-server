@@ -42,7 +42,6 @@ const joiUpdatePassSchema = Joi.object({
 });
 
 const joiUpdateNameSchema = Joi.object({
-  email: Joi.string().email().required(),
   name: Joi.string().min(4).required(),
 });
 
