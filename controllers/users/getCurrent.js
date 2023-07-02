@@ -1,8 +1,8 @@
 const getCurrent = async (req, res, next) => {
   try {
-    const { name, email } = await req.user;
+    const { name, email, role } = await req.user;
 
-    res.status(200).json({ name, email });
+    res.status(200).json({ name, email, role });
   } catch (error) {
     next(error);
   }

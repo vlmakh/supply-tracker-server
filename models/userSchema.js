@@ -22,6 +22,12 @@ const userSchema = Schema(
       type: String,
       default: null,
     },
+    role: {
+      type: String,
+      enum: ["MANAGER", "HEAD", "DIRECTOR", "ADMIN"],
+      required: true,
+      default: "MANAGER",
+    },
   },
   { versionKey: false, timestamps: true }
 );
