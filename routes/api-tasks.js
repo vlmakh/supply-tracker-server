@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/", auth, ctrl.getTasks);
 
 router.get("/range", auth, ctrl.getTasksByRange);
-
+router.get("/uncompleted", auth, ctrl.getUncompletedTasksByRange);
 router.get("/dateOrder", auth, ctrl.getTasksByDateOrder);
 router.get("/dateInvoice", auth, ctrl.getTasksByDateInvoice);
 router.get("/datePayment", auth, ctrl.getTasksByDatePayment);
