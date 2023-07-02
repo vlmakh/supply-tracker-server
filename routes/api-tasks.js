@@ -8,6 +8,12 @@ router.get("/", auth, ctrl.getTasks);
 
 router.get("/range", auth, ctrl.getTasksByRange);
 
+router.get("/dateOrder", auth, ctrl.getTasksByDateOrder);
+router.get("/dateInvoice", auth, ctrl.getTasksByDateInvoice);
+router.get("/datePayment", auth, ctrl.getTasksByDatePayment);
+router.get("/dateETD", auth, ctrl.getTasksByDateETD);
+router.get("/dateETA", auth, ctrl.getTasksByDateETA);
+
 router.post("/", auth, ctrl.addTask);
 
 router.delete("/:taskId", auth, ctrl.deleteTask);
