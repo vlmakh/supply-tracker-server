@@ -2,7 +2,7 @@ const { User, joiLoginSchema } = require("../../models/userSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { Unauthorized } = require("http-errors");
-const { SECRET } = process.env;
+const { ACCESS_SECRET } = process.env;
 
 const login = async (req, res, next) => {
   try {
@@ -26,18 +26,9 @@ const login = async (req, res, next) => {
       throw new Unauthorized("Password is wrong");
     }
 
-    // if (user.token) {
-    //   res.status(200).json({
-    //     token: user.token,
-    //     user: {
-    //       email: email,
-    //       name: user.name,
-    //     },
-    //   });
-    //   next();
-    // }
-
-    const token = jwt.sign({ id: user._id }, SECRET, { expiresIn: "1w" });
+    const token = jwt.sign({ id: user._id }, ACCESS_SECRET, {
+      expiresIn: "1d",
+    });
     await User.findByIdAndUpdate(user._id, { token });
 
     res.status(200).json({
