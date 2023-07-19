@@ -11,18 +11,10 @@ const refresh = async (req, res, next) => {
       throw new NotFound("Invalid refreshToken");
     }
 
-    const { id, exp } = jwt.verify(refreshToken, REFRESH_SECRET);
-
-    /* проверить что refreshToken не протух */
-    const timeNow = new Date();
-
-    if (exp < timeNow) {
-      throw new Forbidden("Token is expidred");
-    }
+    const { id } = jwt.verify(refreshToken, REFRESH_SECRET);
 
     const user = await User.findById(id);
 
-    /* проверить что refreshToken есть базе и не украден */
     const isRefreshTokenAllowed = user.refreshTokens.includes(refreshToken);
 
     if (!isRefreshTokenAllowed) {
