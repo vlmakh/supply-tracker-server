@@ -22,6 +22,10 @@ const userSchema = Schema(
       type: String,
       default: null,
     },
+    refreshTokens: {
+      type: Array,
+      default: [],
+    },
     role: {
       type: String,
       enum: ["MANAGER", "HEAD", "DIRECTOR", "ADMIN"],

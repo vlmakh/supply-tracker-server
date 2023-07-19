@@ -12,6 +12,8 @@ router.get("/logout", auth, ctrl.logout);
 
 router.get("/current", auth, ctrl.getCurrent);
 
+router.get("/refresh", ctrl.refresh);
+
 router.post("/updateName", auth, ctrl.updateName);
 
 router.post("/updatePass", auth, ctrl.updatePass);

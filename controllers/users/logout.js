@@ -2,9 +2,9 @@ const { User } = require("../../models/userSchema");
 
 const logout = async (req, res, next) => {
   try {
-    const { user } = req;
+    const { _id } = req.user;
 
-    await User.findByIdAndUpdate(user._id, { token: null });
+    await User.findByIdAndUpdate(_id, { token: null, refreshTokens: [] });
 
     res.status(204).json();
   } catch (error) {
