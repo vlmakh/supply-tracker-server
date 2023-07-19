@@ -1,14 +1,14 @@
-const { Unauthorized } = require("http-errors");
-const jwt = require("jsonwebtoken");
 const { User } = require("../models/userSchema");
+const jwt = require("jsonwebtoken");
 const { ACCESS_SECRET } = process.env;
+const { NotFound, Unauthorized } = require("http-errors");
 
 const auth = async (req, res, next) => {
   const { authorization = "" } = req.headers;
-  const [bearer, token] = authorization.split(" ");
+  const token = authorization.split(" ")[1];
 
   try {
-    if (bearer !== "Bearer") {
+    if (!token) {
       throw new Unauthorized("Unauthorized");
     }
 
@@ -17,7 +17,7 @@ const auth = async (req, res, next) => {
     const user = await User.findById(id);
 
     if (!user) {
-      throw new Unauthorized("Unauthorized");
+      throw new NotFound("User not found");
     }
 
     req.user = user;
