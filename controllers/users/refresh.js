@@ -34,6 +34,7 @@ const refresh = async (req, res, next) => {
     });
 
     res.cookie("refreshToken", newRefreshToken, {
+      secure: true,
       maxAge: 30 * 24 * 60 * 60 * 1000,
       httpOnly: true,
     });

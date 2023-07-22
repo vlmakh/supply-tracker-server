@@ -3,7 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
-// const { CLIENT_URL } = process.env;
+const { CLIENT_URL } = process.env;
 
 const tasksRouter = require("./routes/api-tasks");
 const usersRouter = require("./routes/api-users");
@@ -13,7 +13,7 @@ const app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
-app.use(cors());
+app.use(cors({ credentials: true, origin: CLIENT_URL }));
 app.use(cookieParser());
 app.use(express.json());
 
