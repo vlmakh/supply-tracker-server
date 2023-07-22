@@ -1,8 +1,8 @@
 const { User, joiLoginSchema } = require("../../models/userSchema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { Unauthorized } = require("http-errors");
-const { ACCESS_SECRET } = process.env;
+const { Forbidden } = require("http-errors");
+const { ACCESS_SECRET, REFRESH_SECRET } = process.env;
 
 const login = async (req, res, next) => {
   try {
@@ -17,22 +17,35 @@ const login = async (req, res, next) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      throw new Unauthorized("Unknown email");
+      throw new Forbidden("Unknown email");
     }
 
     const passCheck = bcrypt.compareSync(password, user.password);
 
     if (!passCheck) {
-      throw new Unauthorized("Password is wrong");
+      throw new Forbidden("Password is wrong");
     }
 
-    const token = jwt.sign({ id: user._id }, ACCESS_SECRET, {
-      expiresIn: "1d",
+    const accessToken = jwt.sign({ id: user._id }, ACCESS_SECRET, {
+      expiresIn: "30min",
     });
-    await User.findByIdAndUpdate(user._id, { token });
+
+    const refreshToken = jwt.sign({ id: user._id }, REFRESH_SECRET, {
+      expiresIn: "30d",
+    });
+
+    await User.findByIdAndUpdate(user._id, {
+      $push: { refreshTokens: refreshToken },
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    });
 
     res.status(200).json({
-      token: token,
+      token: accessToken,
+      refreshToken,
       user: {
         email: email,
         name: user.name,
