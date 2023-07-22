@@ -24,6 +24,10 @@ const auth = async (req, res, next) => {
     next();
   } catch (error) {
     if (error.message === "invalid signature") {
+      error.status = 404;
+    }
+
+    if (error.message === "jwt expired") {
       error.status = 401;
     }
     next(error);

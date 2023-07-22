@@ -22,7 +22,7 @@ const refresh = async (req, res, next) => {
     }
 
     const accessToken = jwt.sign({ id }, ACCESS_SECRET, {
-      expiresIn: "1min",
+      expiresIn: "30min",
     });
 
     const newRefreshToken = jwt.sign({ id }, REFRESH_SECRET, {

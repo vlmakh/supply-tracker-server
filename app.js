@@ -3,6 +3,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
+const { CLIENT_URL } = process.env;
 // const swaggerUi = require("swagger-ui-express");
 // const swaggerDocument = require("./swagger/openapi.json");
 
@@ -16,7 +17,7 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(logger(formatsLogger));
-app.use(cors());
+app.use(cors({ credentials: true, origin: CLIENT_URL }));
 app.use(cookieParser());
 app.use(express.json());
 

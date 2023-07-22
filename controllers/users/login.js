@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { Forbidden } = require("http-errors");
 const { ACCESS_SECRET, REFRESH_SECRET } = process.env;
-// const uid = require("uid");
 
 const login = async (req, res, next) => {
   try {
@@ -28,7 +27,7 @@ const login = async (req, res, next) => {
     }
 
     const accessToken = jwt.sign({ id: user._id }, ACCESS_SECRET, {
-      expiresIn: "1min",
+      expiresIn: "30min",
     });
 
     const refreshToken = jwt.sign({ id: user._id }, REFRESH_SECRET, {
