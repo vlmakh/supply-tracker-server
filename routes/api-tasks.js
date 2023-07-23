@@ -19,5 +19,6 @@ router.delete("/:taskId", auth, ctrl.deleteTask);
 router.put("/:taskId/", auth, ctrl.updateTask);
 
 router.patch("/:taskId/status", auth, ctrl.updateTaskStatus);
+router.patch("/:taskId/owner", auth, ctrl.updateTaskOwner);
 
 module.exports = router;
