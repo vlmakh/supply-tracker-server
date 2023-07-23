@@ -4,8 +4,6 @@ const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-router.get("/", auth, ctrl.getTasks);
-
 router.get("/range", auth, ctrl.getTasksByRange);
 router.get("/uncompleted", auth, ctrl.getUncompletedTasksByRange);
 router.get("/dateOrder", auth, ctrl.getTasksByDateOrder);

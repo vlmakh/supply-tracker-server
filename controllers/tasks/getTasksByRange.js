@@ -4,8 +4,6 @@ const getTasksByRange = async (req, res, next) => {
   const { _id, role } = await req.user;
   const { startDate, endDate } = req.query;
 
-  console.log(req.body);
-
   if (role === "HEAD") {
     try {
       const data = await Task.find({
