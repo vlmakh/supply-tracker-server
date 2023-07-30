@@ -51,6 +51,11 @@ const taskSchema = Schema(
       ref: "user",
       required: true,
     },
+    ownerName: {
+      type: String,
+      ref: "user",
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );

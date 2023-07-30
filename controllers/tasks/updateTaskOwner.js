@@ -3,7 +3,7 @@ const { NotFound, BadRequest } = require("http-errors");
 
 const updateTaskOwner = async (req, res, next) => {
   const { taskId } = req.params;
-  const { newOwnerId } = req.body;
+  const { userName, userId } = req.body;
   const { role } = await req.user;
 
   if (role !== "HEAD") {
@@ -12,7 +12,7 @@ const updateTaskOwner = async (req, res, next) => {
     try {
       const data = await Task.findByIdAndUpdate(
         taskId,
-        { owner: newOwnerId },
+        { owner: userId, ownerName: userName },
         {
           new: true,
         }

@@ -20,7 +20,7 @@ const getTasksByRange = async (req, res, next) => {
     try {
       const data = await Task.find(
         { owner: _id, dateOrder: { $gte: startDate, $lte: endDate } },
-        { owner: 0 }
+        { owner: 0, ownerName: 0 }
       ).sort({
         dateOrder: 1,
       });
