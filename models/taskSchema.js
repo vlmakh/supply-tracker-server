@@ -61,6 +61,7 @@ const taskSchema = Schema(
 );
 
 const joiTaskSchema = Joi.object({
+  _id: Joi.string(),
   name: Joi.string().required(),
   qty: Joi.number().required(),
   unit: Joi.string().required(),
@@ -72,6 +73,7 @@ const joiTaskSchema = Joi.object({
   dateETD: Joi.date(),
   dateETA: Joi.date().required(),
   comments: Joi.string(),
+  completed: Joi.boolean(),
 });
 
 const joiTaskStatusSchema = Joi.object({
